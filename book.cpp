@@ -9,6 +9,7 @@ private:
 	std::string isbn;
 	int edition;
 	std::string cost;
+	bool required;
 public:
 	// Constructors
 	book(std::string i, std::string t);
@@ -21,7 +22,8 @@ public:
 	std::string get_isbn(){ return isbn;}
 	int get_edition(){ return edition;}
 	std::string get_cost(){ return cost;}
-	
+	bool is_required(){ return required;}
+
 	// Set Functions
 	void set_title(std::string t){ title = t;}
 	void set_author(std::string a){ author = a;}
@@ -30,6 +32,7 @@ public:
 	void set_isbn(int i){ isbn = i;}
 	void set_edition(int e){ edition = e;}
 	void set_cost(std::string c){ cost = c;} 
+	void set_required(bool r){ required = r;}
 };
 
 book::book(std::string i,std::string t){
