@@ -24,6 +24,7 @@ int main(){
 	string command = "";
 	string args = "";
 	vector<book> book_database;
+	vector<course> course_database;
 	while(usr_input.compare("quit")!=0){
 		getline(std::cin, usr_input);
 		int index = usr_input.find(" ", 0); //find first instance of whitepace in user input
@@ -66,8 +67,28 @@ int main(){
 			}
 		}
 		else if(command.compare("C")==0){
+			//define a course
+			course new_course(tokens[0], stoi(tokens[1]), tokens[2]);
+			course_database.push_back(new_course);	
 		}
 		else if(command.compare("A")==0){
+			//assign a book to a class	
+			vector<book>::iterator temp;
+			for(vector<book>::iterator it = book_database.begin(); it!=book_database.end();++it){
+				if(it->get_isbn().compare(tokens[0])==0){
+					if(tokens[4].compare("R")==0)
+						it->set_required(1);
+					else
+						it->set_required(0);
+					temp = it;
+				}
+			}
+			for(vector<course>::iterator it = course_database.begin(); it!=course_database.end(); ++it){
+				if((it->get_department().compare(tokens[1])==0) && (it->get_course_num()==stoi(tokens[2]))){
+					it->add_book_to_course(*temp);
+					it->add_book_to_section(*temp,stoi(tokens[3]), tokens[4]);		
+				}
+			}
 		}
 		else if(command.compare("GC")==0){
 		}

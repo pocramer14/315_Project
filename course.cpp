@@ -31,5 +31,34 @@ public:
 		section sec(s);
 		sections.push_back(sec);
 	}
+	
+	void add_book_to_course(book b){
+		books.push_back(b);
+	}
+
+	void add_book_to_section(book b, int s_num, std::string required){
+		bool req;
+		if(required.compare("R")==0)
+			req = 1;
+		else
+			req = 0;
+		//search to see if section already exists
+		for(std::vector<section>::iterator it = sections.begin(); it!=sections.end(); ++it){
+			if(it->get_sec_num()==s_num){
+				if(req)
+					it->add_req_book(b);
+				else
+					it->add_opt_book(b);
+				return;
+			}
+		}
+		//if section does not exist, add it and the corresponding book
+		add_section(s_num);
+		if(req)
+			sections.back().add_req_book(b);
+		else
+			sections.back().add_opt_book(b);
+		
+	}
 };
 

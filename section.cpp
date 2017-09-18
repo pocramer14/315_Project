@@ -16,6 +16,8 @@ public:
 
 	// Set Functions
 	void set_sec_num(int n){sec_num = n;} 
+	void add_req_book(book b){req_books.push_back(b);}
+	void add_opt_book(book b){opt_books.push_back(b);}
 };
 
 section::section(int n){sec_num = n;}
